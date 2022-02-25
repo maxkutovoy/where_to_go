@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('', views.hi),
+    path('<int:place_id>/', views.about_place)
 ]
