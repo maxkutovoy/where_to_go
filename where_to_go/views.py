@@ -8,6 +8,7 @@ from pprint import  pprint
 
 def index(request):
     places_points = []
+    images = []
     places = Place.objects.all()
 
     for place in places:
