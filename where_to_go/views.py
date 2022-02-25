@@ -9,6 +9,7 @@ from pprint import  pprint
 def index(request):
     places_points = []
     places = Place.objects.all()
+
     for place in places:
 
         places_points.append(
