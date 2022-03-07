@@ -1,17 +1,17 @@
 import json
 
 from django.shortcuts import render
-from places.models import Place, Image
+from django.urls import reverse
 
-from pprint import  pprint
+from places.models import Place, Image
 
 
 def index(request):
     places_points = []
-    images = []
     places = Place.objects.all()
 
     for place in places:
+        about_place = reverse('about-place', args=(place.id, ))
 
         places_points.append(
             {
@@ -23,7 +23,7 @@ def index(request):
                 "properties": {
                     "title": place.title,
                     "placeId": place.pk,
-                    "detailsUrl": "../static/places/moscow_legends.json"
+                    "detailsUrl": about_place,
                 }
             }
         )
