@@ -19,9 +19,7 @@ from django.contrib import admin
 from django.urls import include
 from django.urls import path
 
-import places
 from where_to_go import views
-
 
 
 urlpatterns = [
