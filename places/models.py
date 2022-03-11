@@ -1,6 +1,9 @@
 from django.db import models
 
 # Create your models here.
+from django.utils.html import format_html
+
+
 class Place(models.Model):
     title = models.CharField('Название', max_length=200)
     description_short = models.TextField('Короткое описание', blank=True)
@@ -14,11 +17,6 @@ class Place(models.Model):
 
 class Image(models.Model):
 
-    orders = [
-        (1, '1'),
-        (2, '2'),
-    ]
-
     place = models.ForeignKey(
         Place,
         verbose_name="Место",
@@ -26,16 +24,20 @@ class Image(models.Model):
         related_name="images"
     )
 
-    image_order = models.PositiveSmallIntegerField(
+    order = models.PositiveIntegerField(
         'Порядок картинки',
-        choices=orders
+        blank=False,
+        null=False
     )
+
     image = models.ImageField(
         "Изображение",
         null=True,
         blank=True
     )
 
-    def __str__(self):
-        return f"{self.image_order} {self.place}"
+    class Meta(object):
+        ordering = ['order']
 
+    def __str__(self):
+        return f"{self.order} {self.image}"
