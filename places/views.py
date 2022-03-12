@@ -1,11 +1,40 @@
+import json
+
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
 from places.models import Place, Image
 
-# Create your views here.
-def hi(request):
-    return render(request, 'hi')
+
+def index(request):
+    places_points = []
+    places = Place.objects.all()
+
+    for place in places:
+        about_place = reverse('about-place', args=(place.id, ))
+
+        places_points.append(
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [place.lon, place.lat]
+                },
+                "properties": {
+                    "title": place.title,
+                    "placeId": place.pk,
+                    "detailsUrl": about_place,
+                }
+            }
+        )
+
+    features = {
+        "type": "FeatureCollection",
+        "features": places_points
+    }
+
+    return render(request, 'index.html', context=features)
 
 
 def about_place(request, place_id):
