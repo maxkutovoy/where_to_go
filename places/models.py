@@ -29,14 +29,13 @@ class Image(models.Model):
 
     order = models.PositiveIntegerField(
         'Порядок картинки',
-        blank=False,
-        null=False
+        default=0,
     )
 
     image = models.ImageField(
         "Изображение",
         null=True,
-        blank=True
+        blank=True,
     )
 
     class Meta(object):
