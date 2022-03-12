@@ -21,6 +21,7 @@ class PlaceAdmin(admin.ModelAdmin):
     inlines = [
         ImageInLine,
     ]
+    search_fields = ['title']
 
 
 @admin.register(Image)
