@@ -145,7 +145,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-if env.bool('DEPLOY_MODE', False):
+if env.bool('PRODUCT_MODE', False):
     # HTTPS settings
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
