@@ -13,6 +13,10 @@ class Place(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+    class Meta:
+        verbose_name = "Интересное место"
+        verbose_name_plural = "Интересные места"
+
 
 class Image(models.Model):
 
@@ -37,6 +41,8 @@ class Image(models.Model):
 
     class Meta(object):
         ordering = ['order']
+        verbose_name = "Изображение"
+        verbose_name_plural = "Изображения"
 
     def __str__(self):
-        return f"{self.order} {self.image}"
+        return f"{self.order} {self.place.title}"
