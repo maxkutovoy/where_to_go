@@ -33,9 +33,7 @@ class Image(models.Model):
     )
 
     image = models.ImageField(
-        "Изображение",
-        null=True,
-        blank=True,
+        "Изображение"
     )
 
     class Meta(object):
