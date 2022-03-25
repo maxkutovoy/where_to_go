@@ -16,19 +16,19 @@ class Command(BaseCommand):
         json_url = options['json_url']
         new_place_response = requests.get(json_url)
         new_place_response.raise_for_status()
-        new_place_json = new_place_response.json()
+        place_raw = new_place_response.json()
 
         place, created = Place.objects.get_or_create(
-            title=new_place_json['title'],
+            title=place_raw['title'],
             defaults = {
-                'description_short': new_place_json['description_short'],
-                'description_long': new_place_json['description_long'],
-                'lat': new_place_json['coordinates']['lat'],
-                'lon': new_place_json['coordinates']['lng'],
+                'description_short': place_raw['description_short'],
+                'description_long': place_raw['description_long'],
+                'lat': place_raw['coordinates']['lat'],
+                'lon': place_raw['coordinates']['lng'],
             }
         )
 
-        for image_url in new_place_json['imgs']:
+        for image_url in place_raw['imgs']:
 
             place_image = Image.objects.create(place=place)
             name = urlparse(image_url).path.split('/')[-1]

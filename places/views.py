@@ -12,7 +12,7 @@ def index(request):
     places = Place.objects.all()
 
     for place in places:
-        about_place = reverse('about-place', args=(place.id, ))
+        place_details_url = reverse('about-place', args=(place.id, ))
 
         places_points.append(
             {
@@ -24,7 +24,7 @@ def index(request):
                 "properties": {
                     "title": place.title,
                     "placeId": place.pk,
-                    "detailsUrl": about_place,
+                    "detailsUrl": place_details_url,
                 }
             }
         )
