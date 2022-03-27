@@ -26,9 +26,11 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(Image)
 class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ["__str__", "order", 'image', 'get_preview']
-    fields = ["order", 'image', 'get_preview']
-    readonly_fields = ("get_preview",)
+    list_display = ['__str__', 'image', 'place', 'get_preview']
+    fields = ['image', 'place', 'get_preview']
+    readonly_fields = ('get_preview',)
+    raw_id_fields = ('place',)
+    autocomplete_fields = ('place', )
 
     def get_preview(self, obj):
         return format_html(
